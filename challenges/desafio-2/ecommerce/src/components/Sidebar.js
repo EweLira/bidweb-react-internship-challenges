@@ -9,7 +9,7 @@ import {CartContext} from '../context/CartContext'
 
 const Sidebar = () => {
   const {isOpen,handleClose} = useContext(SidebarContext);
-  const {cart} = useContext(CartContext);
+  const {cart, clearCart} = useContext(CartContext);
   return (
   <div className={`${isOpen ? 'right-0': '-right-full'}
   'w-full bg-white fixed top-0 h-full shadow-2x1 md:w-[35vw] x1:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]`}>
@@ -21,9 +21,16 @@ const Sidebar = () => {
         <IoMdArrowForward className='text-2x1'/>
       </div>
     </div>
+
     <div> {cart.map(item =>{
-      return <div>item do carrinho</div>
+      return <CartItem item={item} key={item.id}/>
     })}
+      </div>
+      <div>
+        <div>
+          <div><span>Total:</span> R$ </div>
+        </div>
+        <div onClick={clearCart} className='cursor-pointer w-12 h-12 justify-center flex py-4 text-white bg-red-500 items-center text-x1'><FiTrash2/></div>
       </div>
   </div>
   );
